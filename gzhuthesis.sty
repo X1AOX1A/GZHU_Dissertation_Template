@@ -1,0 +1,186 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{gzhuthesis}[2021/04/16 v1.0]
+
+%页面大小设置
+\RequirePackage{geometry}
+\geometry{a4paper, left=2.7cm, right=2.5cm, top=2cm, bottom=2cm}
+ \setlength{\baselineskip}{23pt}
+
+
+%页眉页脚设置
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{} \chead{} \rhead{}
+\lfoot{ }  \cfoot{\thepage}  \rfoot{ }
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+
+%中文宏包
+\RequirePackage{xeCJK}
+\RequirePackage{newtxtext}
+
+
+
+%数学类宏包
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{newtxmath}
+\renewcommand\theequation{\arabic{section}-\arabic{equation}}  %公式的编号
+
+%各级标题设置
+\setcounter{secnumdepth}{4}
+\ctexset{section={name={}, 
+		number=\arabic{section}, 
+		format={\centering\heiti\zihao{3}}, 
+		beforeskip=24pt, afterskip=24pt,
+		indent=0\ccwd}
+}
+\ctexset{subsection={name={\mbox{ },}, 
+		number=\arabic{section}.\arabic{subsection}, 
+		aftername=\hspace{0.5\ccwd},
+		format={\raggedright\heiti\zihao{-4}}, 
+		beforeskip=12pt, afterskip=0pt,
+		indent=-0.25\ccwd}
+}
+\ctexset{subsubsection={name={}, 
+		number=\arabic{section}.\arabic{subsection}.\arabic{subsubsection}, 
+		format={\raggedright\heiti\zihao{-4}},
+		aftername=\hspace{0.5\ccwd},
+		beforeskip=12pt, afterskip=0pt,
+		indent=0\ccwd}
+}
+\ctexset{paragraph={name={}, 
+		number=\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}, 
+		format={\raggedright\heiti\zihao{-4}},
+		aftername=\hspace{0.5\ccwd},
+		beforeskip=0pt, afterskip=0pt,
+		indent=0\ccwd,
+		runin=false}
+}
+
+
+
+
+
+
+%图片宏包
+\RequirePackage{graphicx}
+%图片存放路径
+\graphicspath{{figures/}{figure/}{pictures/}{picture/}{pic/}{pics/}{image/}{images/}}
+
+
+
+
+%表格宏包
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{multicol}
+\RequirePackage{multirow}
+\RequirePackage{bigstrut}
+
+
+
+
+%超链接宏包
+\RequirePackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black}
+%\RequirePackage{breakurl}
+
+
+
+%参考文献样式，对引用的编号进行自动排序，
+\usepackage[sort&compress]{natbib}
+\setlength{\bibsep}{0pt plus 0.3ex}%参考文献条目的间距
+\setcitestyle{numbers,square,comma}
+%调用的参考文献格式控制宏包名称
+\bibliographystyle{gbt7714-2015-num}
+% 定义新命令\upcite, 使参考文献引用以上标形式出现
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
+
+
+
+
+
+%图表标题设置
+\RequirePackage{caption}
+\renewcommand{\captionfont}{\zihao{5}}
+\renewcommand{\captionlabelfont}{\zihao{5}}
+\renewcommand {\thetable} {\thesection{}-\arabic{table}}
+\renewcommand {\thefigure} {\thesection{}-\arabic{figure}}
+\captionsetup{labelformat=default,labelsep=quad} 
+
+
+
+%论文详细信息
+\newcommand{\cntitle}[1]{\def\yzqd@cntitle{#1}}
+\newcommand{\zybj}[1]{\def\yzqd@zybj{#1}}
+\newcommand{\name}[1]{\def\yzqd@name{#1}}
+\newcommand{\zdjs}[1]{\def\yzqd@zdjs{#1}}
+
+\RequirePackage{setspace}
+%论文头部信息
+\newcommand{\makehead}{
+			\begin{center}
+				\vspace*{0em}
+				\begin{spacing}{1.5}
+				{\heiti\zihao{3}\yzqd@cntitle}\par
+				\yzqd@zybj~~\yzqd@name\par
+				指导教师：\yzqd@zdjs
+				\end{spacing}
+				\vspace*{0em}
+			\end{center}
+		}
+
+%中文摘要
+\newenvironment{cnabstract}{\mbox{ }\\ \mbox{ }\\
+	\noindent{\heiti\zihao{4}摘要}\hspace*{2\ccwd}\songti\zihao{-4} 
+}{  }
+%中文关键词
+\newenvironment{cnkeyword}{\mbox{ }\\
+	\noindent{\heiti\zihao{4}关键词}\hspace*{2\ccwd}\songti\zihao{-4} 
+}{  }
+%英文摘要
+\newenvironment{engabstract}{\mbox{ }\\
+	\noindent{\bfseries\heiti\zihao{4}ABSTRACT}\hspace*{2\ccwd}\songti\zihao{-4} 
+}{  }
+%英文关键词
+\newenvironment{engkeyword}{\mbox{ }\\
+	\noindent{\bfseries\heiti\zihao{4}KEY WORDS}\hspace*{2\ccwd}\songti\zihao{-4} 
+}{  }
+
+
+
+
+%目录设置
+\setcounter{tocdepth}{3}
+\RequirePackage{titletoc}
+\usepackage{titletoc}
+\titlecontents{section}[1em]{\zihao{-4}}{\contentslabel{1em}}{\hspace*{-1em}}{ \titlerule*[0.5pc]{$.$}\contentspage}
+\titlecontents{subsection}[3em]{\zihao{-4}}{\contentslabel{2em}}{\hspace*{-2em}}{ \titlerule*[0.5pc]{$.$}\contentspage}
+\titlecontents{subsubsection}[5.5em]{\zihao{-4}}{\contentslabel{2.5em}}{\hspace*{-2em}}{ \titlerule*[0.5pc]{$.$}\contentspage}
+
+
+
+
+\AtBeginDocument{
+	\setlength{\abovecaptionskip}{5pt}
+	\setlength{\belowcaptionskip}{5pt}
+	\setlength{\abovedisplayskip}{0pt}
+	\setlength{\belowdisplayskip}{-0pt}
+}
+
+
+
+
+\RequirePackage{enumerate}
+\RequirePackage{enumitem}
+\setlength{\itemsep}{0pt}
+\setlist[1]{topsep=0pt, itemsep=0pt,}
+\setlist[2]{topsep=0pt, itemsep=0pt,}
+
+
+
+
+

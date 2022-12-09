@@ -1,0 +1,29 @@
+% !TeX encoding = UTF-8
+% !TEX program = xelatex 
+
+\documentclass[12pt]{ctexart}     %12pt=小四号正文
+
+\usepackage{gzhuthesis}     %开发的格式宏包
+
+\begin{document}
+
+%学位论文信息，标题，作者，指导教师，摘要，关键词等
+\input{sections/thesisinfo} 
+
+\newpage					%目录另起一页
+\tableofcontents		%插入目录
+\newpage					%目录后另起一页
+
+\input{sections/introduction}
+\input{sections/examples}
+\input{sections/conclusion}
+\input{sections/thanks}
+
+%插入参考文献
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\bibliography{planref}
+
+
+
+\end{document}
